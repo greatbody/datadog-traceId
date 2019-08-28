@@ -1,13 +1,15 @@
 // ==UserScript==
 // @name         datadog-traceId
 // @namespace    http://tampermonkey.net/
-// @version      0.1.5
+// @version      0.1.6
 // @description  onclick to view logs of a trace id
-// @author       You
-// @match        https://app.datadoghq.com/logs*
+// @author       greatbody
+// @include      https://app.datadoghq.com/logs*
 // @grant        unsafeWindow
 // @run-at       document-end
 // ==/UserScript==
+
+// 2019年08月28日15:28:57 update author info, and use include
 
 const baseURL = 'https://app.datadoghq.com';
 
