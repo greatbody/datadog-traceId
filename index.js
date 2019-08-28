@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         datadog-traceId
 // @namespace    http://tampermonkey.net/
-// @version      0.1.4
+// @version      0.1.5
 // @description  onclick to view logs of a trace id
 // @author       You
 // @match        https://app.datadoghq.com/logs*
@@ -58,7 +58,7 @@ function findTraceId() {
         const button = document.createElement('button');
         const divBox = document.querySelector('.ui_layout_expandable-block__content');
         const boxPreClass = divBox.childNodes[0];
-        button.innerText = 'Open Logs of traceId';
+        button.innerHTML = 'Open Logs of traceId<div class="ui_form_button__icon-wrapper"><svg class="ui_icons_icon ui_icons_icon--md ui_icons_icon--is-scaled-down ui_form_button__icon ui_form_button__icon--position-right"><title></title><use xlink:href="#ui_icons_export" fill=""></use></svg></div>';
         button.id = 'btnOpenTraceIdView';
         button.onclick = () => {
             const startMilliSec = new Date(timestamp).getTime() - 10 * 60 * 1000;
