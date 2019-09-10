@@ -49,7 +49,7 @@ function findTraceId() {
     let timestampObj = attributes['@timestamp'];
 
     if (!timestampObj) {
-        const dom = document.querySelector('.log_event-panel_status-date__date span.absolute')
+        const dom = document.querySelector('.log_event-panel_status-date__date span.absolute');
         timestampObj = {
             row: null,
             value: dom.innerHTML.replace('at', '')
