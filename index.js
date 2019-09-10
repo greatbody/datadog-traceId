@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         datadog-traceId
 // @namespace    http://tampermonkey.net/
-// @version      0.1.7
+// @version      0.1.8
 // @description  onclick to view logs of a trace id
 // @author       greatbody
 // @include      https://app.datadoghq.com/logs*
@@ -10,6 +10,7 @@
 // ==/UserScript==
 
 // 2019年08月28日15:28:57 update author info, and use include
+// 2019年09月10日15:04:16 use Datetime at very top that every log has as a backup source of timestamp
 
 const baseURL = 'https://app.datadoghq.com';
 
@@ -45,10 +46,17 @@ function clearExistButton() {
 function findTraceId() {
     const attributes = buildAttrbutes();
     const traceIdObj = attributes['traceId'];
-    const timestampObj = attributes['@timestamp'];
+    let timestampObj = attributes['@timestamp'];
 
+    if (!timestampObj) {
+        const dom = document.querySelector('.log_event-panel_status-date__date span.absolute')
+        timestampObj = {
+            row: null,
+            value: dom.innerHTML.replace('at', '')
+        };
+    }
 
-    if (!traceIdObj || !traceIdObj.row || !timestampObj) {
+    if (!traceIdObj || !traceIdObj.row) {
         return;
     }
 
